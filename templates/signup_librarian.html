@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Librarian Sign Up - ShelfWise</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #f9d423, #ff4e50);
+            text-align: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin-top: 100px;
+        }
+        .container {
+            background-color: #ffffffcc;
+            padding: 30px;
+            border-radius: 16px;
+            width: 50%;
+            margin: auto;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        input {
+            padding: 10px;
+            margin: 10px;
+            width: 80%;
+            border-radius: 8px;
+            border: 1px solid gray;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            font-size: 18px;
+            width: 85%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Create Librarian Account</h1>
+        <form method="POST">
+            <input type="text" name="username" placeholder="Username" required><br>
+            <input type="password" name="password" placeholder="Password" required><br>
+            <input type="submit" value="Sign Up">
+        </form>
+        {% if message %}
+            <p style="color:green">{{ message }}</p>
+        {% endif %}
+        <p><a href="/">Back to Home</a></p>
+    </div>
+</body>
+</html>

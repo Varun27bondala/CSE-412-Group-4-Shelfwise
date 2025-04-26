@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Books - ShelfWise</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #f9d423, #ff4e50);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin-top: 120px;
+        }
+        .banner {
+            background: linear-gradient(to right, #ff9966, #ff5e62);
+            padding: 12px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+        }
+        .banner h1 {
+            color: white;
+            font-size: 32px;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffffcc;
+            padding: 30px;
+            border-radius: 16px;
+            width: 80%;
+            margin: auto;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        a.top-button {
+            display: inline-block;
+            background-color: #6c757d;
+            color: white;
+            padding: 8px 16px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        a.top-button:hover {
+            background-color: #5a6268;
+        }
+        input[type="text"] {
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 60%;
+            border-radius: 8px;
+            border: 1px solid gray;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .action {
+            display: inline-block;
+            margin: 5px;
+            padding: 8px 16px;
+            background-color: #17a2b8;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .action:hover {
+            background-color: #117a8b;
+        }
+        hr {
+            border: none;
+            height: 1px;
+            background-color: #444;
+            width: 90%;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="banner">
+    <h1>📚 ShelfWise – Smart Library</h1>
+</div>
+
+<div class="container">
+    <a href="/dashboard" class="top-button">🏠 Back to Dashboard</a>
+    <h1>Available Books</h1>
+    <form method="POST">
+        <input type="text" name="search" placeholder="Search books...">
+        <input type="submit" value="Search">
+    </form>
+    <br>
+    {% for book in books %}
+        <p><strong>{{ book[1] }}</strong> by {{ book[2] }} | Genre: {{ book[4] }} | Copies: {{ book[5] }}</p>
+        
+        {% if session['role'] == 'librarian' %}
+            <a href="/edit_book/{{ book[0] }}" class="action">✏️ Edit</a> 
+            <a href="/delete_book/{{ book[0] }}" class="action">🗑️ Delete</a>
+        {% else %}
+            <a href="/borrow_book/{{ book[0] }}" class="action">📚 Borrow</a>
+        {% endif %}
+        
+        <hr>
+    {% endfor %}
+</div>
+
+</body>
+</html>

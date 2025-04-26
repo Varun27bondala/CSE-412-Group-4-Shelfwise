@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Borrowed Books - ShelfWise</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #f9d423, #ff4e50);
+            text-align: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin-top: 120px;
+        }
+        .banner {
+            background: linear-gradient(to right, #ff9966, #ff5e62);
+            padding: 12px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+        }
+        .banner h1 {
+            color: white;
+            font-size: 32px;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffffcc;
+            padding: 30px;
+            border-radius: 16px;
+            width: 70%;
+            margin: auto;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        a.top-button {
+            display: inline-block;
+            background-color: #6c757d;
+            color: white;
+            padding: 8px 16px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        a.top-button:hover {
+            background-color: #5a6268;
+        }
+        a.action {
+            display: inline-block;
+            margin: 5px;
+            padding: 8px 16px;
+            background-color: #dc3545;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        a.action:hover {
+            background-color: #c82333;
+        }
+        hr {
+            border: none;
+            height: 1px;
+            background-color: #444;
+            width: 90%;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="banner">
+    <h1>📚 ShelfWise – Smart Library</h1>
+</div>
+
+<div class="container">
+    <a href="/dashboard" class="top-button">🏠 Back to Dashboard</a>
+    <h1><strong>My Borrowed Books</strong></h1>
+    {% for t in transactions %}
+        <p><strong>{{ t[1] }}</strong> | Borrowed: {{ t[2] }} | 
+        {% if t[3] %} Returned: {{ t[3] }} | Fine: ${{ t[4] }} 
+        {% else %} Not Returned Yet {% endif %}</p>
+        {% if not t[3] %}
+            <a href="/return_book/{{ t[0] }}" class="action">Return Book</a>
+        {% endif %}
+        <hr>
+    {% endfor %}
+</div>
+
+</body>
+</html>
